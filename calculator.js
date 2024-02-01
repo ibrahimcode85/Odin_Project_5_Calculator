@@ -1,5 +1,5 @@
-const num1 = 2;
-const num2 = 3;
+let num1 = 2;
+let num2 = 3;
 const operation = 'add';
 
 
@@ -42,7 +42,26 @@ function operator(num1, num2, operation){
     };
 };
 
-console.log(operator(num1,num2,'add'     ));
-console.log(operator(num1,num2,'subtract'));
-console.log(operator(num1,num2,'multiply'));
-console.log(operator(num1,num2,'divide'  ));
+
+// style change on button click 
+addButtonStyle = (event) => {
+    
+    if (event.target.tagName == 'BUTTON'){
+       event.target.style.opacity = '50%';
+       num1 = event.target.textContent;
+    };
+    
+};
+
+removeButtonStyle = (event) => {
+
+    if (event.target.tagName == 'BUTTON' 
+        && event.target.className != 'operator'){
+        event.target.style.opacity = '';
+    };
+    
+};
+
+const buttons = document.querySelector('.container_buttons');
+buttons.addEventListener('mousedown', addButtonStyle    );
+buttons.addEventListener('mouseup'  , removeButtonStyle );
