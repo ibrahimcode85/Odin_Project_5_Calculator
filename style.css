@@ -23,10 +23,16 @@
 }
 
 button {
-    /* display: flex; */
     width: 80px;
     height: 80px;
     font-size: 25px;
     border-radius: 50%;
     border: 1px solid darkgray;
+    flex: 1;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button#zero {
+    flex: 2;
 }
