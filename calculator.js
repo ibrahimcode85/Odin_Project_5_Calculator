@@ -28,7 +28,7 @@ function operator(num1, num2, operation){
             return add(num1, num2);
             break;
 
-        case 'subtract':
+        case 'subtract':jh
             return subtract(num1, num2);
             break;
 
