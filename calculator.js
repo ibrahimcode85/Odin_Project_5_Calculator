@@ -1,6 +1,6 @@
-let num1 = 2;
-let num2 = 3;
-const operation = 'add';
+let prevNumText = '';
+let currNumText = '';
+let operation = '';
 
 
 // declare functions for basic computation
@@ -42,13 +42,39 @@ function operator(num1, num2, operation){
     };
 };
 
+// get info (number/operator/clear) on button click
+getNumber = (event) => {
+    let display = document.querySelector('.display_text');
+    let className = event.target.className;
+
+    if (event.target.tagName == 'BUTTON') {
+        
+        switch(className) {
+            case 'number':
+                currNumText = currNumText + event.target.textContent;
+                display.textContent = currNumText;
+                break;
+            
+            case 'clear':
+                currNumText = '';
+                display.textContent = '0';
+                break;
+            
+            case 'operator':
+                operation = operation + event.target.textContent;
+                break;
+
+        };
+    };
+    
+};
+
 
 // style change on button click 
 addButtonStyle = (event) => {
     
     if (event.target.tagName == 'BUTTON'){
        event.target.style.opacity = '50%';
-       num1 = event.target.textContent;
     };
     
 };
@@ -57,11 +83,15 @@ removeButtonStyle = (event) => {
 
     if (event.target.tagName == 'BUTTON' 
         && event.target.className != 'operator'){
-        event.target.style.opacity = '';
+            event.target.style.opacity = '';
     };
     
 };
 
+
+// add event handlers
 const buttons = document.querySelector('.container_buttons');
+
 buttons.addEventListener('mousedown', addButtonStyle    );
 buttons.addEventListener('mouseup'  , removeButtonStyle );
+buttons.addEventListener('click', getNumber);
