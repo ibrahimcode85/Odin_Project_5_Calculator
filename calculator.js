@@ -43,9 +43,12 @@ function operator(num1, num2, operation){
 };
 
 // get info (number/operator/clear) on button click
-getNumber = (event) => {
+getData = (event) => {
     let display = document.querySelector('.display_text');
     let className = event.target.className;
+
+    
+   
 
     if (event.target.tagName == 'BUTTON') {
         
@@ -56,12 +59,19 @@ getNumber = (event) => {
                 break;
             
             case 'clear':
-                currNumText = '';
-                display.textContent = '0';
+                currNumText = '';                   // clear number variable
+                display.textContent = '0';          // reinitialized display to zero
+
+                // clear operator button styling
+                if (operation != ''){
+                    let buttonOperator = buttons.querySelector(`#${operation}`);
+                    buttonOperator.style.opacity = '';
+                };
+                   
                 break;
             
             case 'operator':
-                operation = operation + event.target.textContent;
+                operation = event.target.id;
                 break;
 
         };
@@ -94,4 +104,4 @@ const buttons = document.querySelector('.container_buttons');
 
 buttons.addEventListener('mousedown', addButtonStyle    );
 buttons.addEventListener('mouseup'  , removeButtonStyle );
-buttons.addEventListener('click', getNumber);
+buttons.addEventListener('click', getData);
