@@ -74,9 +74,8 @@ getData = (event) => {
                 break;
             
             case 'operator':
-
                 // remove styling from previously selected operator before replace.
-                removeOperatorStyle();
+                removeOperatorStyle()
 
                 // replace variable with new selected value
                 operation = event.target.id;
