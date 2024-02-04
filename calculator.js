@@ -66,7 +66,7 @@ getData = (event) => {
 
                 // clear operator button styling
                 if (operation != ''){
-                    removeOperatorStyle();
+                    removeOperatorStyle(operation);
 
                     operation   = '';             // clear operator variable
                 };
@@ -74,11 +74,16 @@ getData = (event) => {
                 break;
             
             case 'operator':
-                // remove styling from previously selected operator before replace.
-                removeOperatorStyle()
+                // capture operation before variable update
+                let prevOperation = operation; 
 
-                // replace variable with new selected value
+                // replace variable with current selected value
                 operation = event.target.id;
+
+                // clear the operator button styling if new operator is selected
+                if (prevOperation != '' && prevOperation != operation) {
+                    removeOperatorStyle(prevOperation);
+                };
 
                 // once operator button is selected, save existing num as prevNum variable
                 // and then reinitialized the currNum.
@@ -97,7 +102,7 @@ getData = (event) => {
                 if (checkVar) {
                     let result = operator(prevNumText, currNumText, operation);
                     display.textContent = result;
-                    removeOperatorStyle();
+                    removeOperatorStyle(operation);
 
                     // save result as prevNum for later use & clear  currNum
                     prevNumText = result;
@@ -130,7 +135,7 @@ removeButtonStyle = (event) => {
     
 };
 
-removeOperatorStyle = () => {
+removeOperatorStyle = (operation) => {
     if (operation != '') {
         let buttonOperator = buttons.querySelector(`#${operation}`);
         buttonOperator.style.opacity = '';
