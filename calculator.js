@@ -58,8 +58,13 @@ getData = (event) => {
         
         switch(className) {
             case 'number':
+                let checkDecimal = event.target.textContent == '.' &&  currNumText.includes('.');
+                
+                if (checkDecimal) break;
+
                 currNumText = currNumText + event.target.textContent;
                 display.textContent = currNumText;
+                
                 break;
             
             case 'clear':
