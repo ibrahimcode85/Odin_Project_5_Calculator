@@ -1,6 +1,9 @@
 let prevNumText = '';
 let currNumText = '';
 let operation = '';
+let arrayNum = [];
+let arrayOperation = [];
+let keyOperation = {'add': '+', 'subtract': '-', 'multiply': '&times;', 'divide': '&#247'};
 
 
 // declare functions for basic computation
@@ -75,37 +78,50 @@ getData = (event) => {
             
             case 'operator':
                 // capture operation before variable update
-                let prevOperation = operation; 
-
+                let prevOperation = operation;
+                
                 // replace variable with current selected value
                 operation = event.target.id;
+                arrayOperation.push(operation);
 
                 // clear the operator button styling if new operator is selected
                 if (prevOperation != '' && prevOperation != operation) {
                     removeOperatorStyle(prevOperation);
                 };
 
-                // once operator button is selected, save existing num as prevNum variable
+                // once operator button is selected, save existing num in the array
                 // and then reinitialized the currNum.
                 if (currNumText != '') {
-                    prevNumText = currNumText;
+                    arrayNum.push(currNumText);
                     currNumText = '';
                 };
 
                 break;
 
             case 'equate':
-                let checkVar = prevNumText != ''
-                                && currNumText != ''
-                                && operation != '';
+                // save the last number
+                arrayNum.push(currNumText);
+
+                // check if calculation can be performed
+                let checkVar = arrayNum.length > 0 && arrayOperation.length > 0;
                 
+                // perform calculation
                 if (checkVar) {
-                    let result = operator(prevNumText, currNumText, operation);
+                    // loop and perform operation
+                    let result = arrayNum[0];
+
+                    for (let idx = 1 ; idx < arrayNum.length; idx++) {
+                        result = operator(result, arrayNum[idx], arrayOperation[idx -1]); 
+                    };
+
+                    // let result = operator(prevNumText, currNumText, operation);
                     display.textContent = result;
                     removeOperatorStyle(operation);
 
-                    // save result as prevNum for later use & clear  currNum
+                    // save result as prevNum for later use & reinitialized all variables
                     prevNumText = result;
+                    arrayNum = [];
+                    arrayOperation = [];
                     currNumText = '';
                 };
 
