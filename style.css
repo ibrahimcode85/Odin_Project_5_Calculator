@@ -48,6 +48,10 @@ button#zero {
     flex: 2;
 }
 
+button.other {
+    background-color: black;
+}
+
 button.operator {
     background-color: orange;
     color: white;
