@@ -68,8 +68,10 @@ getData = (event) => {
                 break;
             
             case 'clear':
-                prevNumText = '';                   // clear number variable
-                currNumText = '';                   // clear number variable
+                prevNumText     = '';                   // clear number variable
+                currNumText     = '';                   // clear number variable
+                arrayNum        = [];                   // clear number collection
+                arrayOperation  = [];                   // clear operators collection
                 display.textContent = '0';          // reinitialized display to zero
 
                 // clear operator button styling
@@ -80,6 +82,12 @@ getData = (event) => {
                 };
                    
                 break;
+            
+            case 'backspace':
+                currNumText = '';
+                display.textContent = '0';
+                break;
+            
             
             case 'operator':
                 // capture operation before variable update
